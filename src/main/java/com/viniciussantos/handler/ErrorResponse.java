@@ -1,7 +1,9 @@
 package com.viniciussantos.handler;
 
 import java.time.LocalDateTime;
-
+/**
+ * Classe de DTO para encapsular os detalhes das respostas de erro.
+ */
 public class ErrorResponse {
     private LocalDateTime timestamp;
     private int status;

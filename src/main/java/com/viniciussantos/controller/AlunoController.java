@@ -6,16 +6,21 @@ import com.viniciussantos.dto.response.AlunoResponse;
 import com.viniciussantos.model.Aluno;
 import com.viniciussantos.service.AlunoService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * Controlador REST para gerenciar operações CRUD relacionadas a alunos.
+ */
 @RestController
 @RequestMapping("/aluno")
 public class AlunoController {
+//    private static final Logger logger = LoggerFactory.getLogger(AlunoController.class);
 
     public final AlunoService alunoService;
 
@@ -23,12 +28,26 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
+    /**
+     * Cria um novo aluno.
+     *
+     * @param alunoRequest Os dados do aluno a serem criados.
+     * @return ResponseEntity contendo os dados do aluno criado e o status HTTP.
+     */
     @PostMapping
     public ResponseEntity<Aluno> criar(@Valid @RequestBody AlunoRequest alunoRequest) {
+//        logger.info("Iniciando a criação de um novo aluno: {}", alunoRequest.getNome());
+
         Aluno savedAluno = alunoService.criar(alunoRequestToAluno(alunoRequest));
         return new ResponseEntity<>(savedAluno, HttpStatus.CREATED);
     }
 
+
+    /**
+     * Lista todos os alunos.
+     *
+     * @return ResponseEntity contendo a lista de todos os alunos e o status HTTP.
+     */
     @GetMapping
     public ResponseEntity<List<AlunoResponse>> listar() {
         List<AlunoResponse> alunos = alunoService.listar()
@@ -38,12 +57,27 @@ public class AlunoController {
         return new ResponseEntity<>(alunos, HttpStatus.OK);
     }
 
+
+    /**
+     * Busca um aluno pelo ID.
+     *
+     * @param id O ID do aluno a ser buscado.
+     * @return ResponseEntity contendo os dados do aluno encontrado e o status HTTP.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<AlunoResponse> buscarPorId(@Valid @PathVariable Long id) {
         Aluno aluno = alunoService.buscarPorId(id);
 
         return new ResponseEntity<>(alunoToAlunoResponse(aluno), HttpStatus.OK);
     }
+
+    /**
+     * Atualiza completamente um aluno.
+     *
+     * @param alunoRequest Os dados do aluno a serem atualizados.
+     * @param id O ID do aluno a ser atualizado.
+     * @return ResponseEntity contendo os dados do aluno atualizado e o status HTTP.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(@Valid @RequestBody AlunoRequest alunoRequest, @PathVariable Long id) {
         Aluno updatedAluno = alunoService.atualizar(alunoRequestToAluno(alunoRequest), id);
@@ -52,6 +86,14 @@ public class AlunoController {
 
     }
 
+
+    /**
+     * Atualiza parcialmente um aluno.
+     *
+     * @param alunoRequest Os dados parciais do aluno a serem atualizados.
+     * @param id O ID do aluno a ser atualizado.
+     * @return ResponseEntity contendo os dados do aluno atualizado e o status HTTP.
+     */
     @PatchMapping("/{id}")
     public ResponseEntity<?> atualizarParcialmente(@Valid @RequestBody AlunoRequest alunoRequest, @PathVariable Long id) {
         Aluno updatedAluno = alunoService.atualizarParcialmente(alunoRequestToAluno(alunoRequest), id);
@@ -60,12 +102,20 @@ public class AlunoController {
 
     }
 
+
+    /**
+     * Deleta um aluno pelo ID.
+     *
+     * @param id O ID do aluno a ser deletado.
+     * @return ResponseEntity com o status HTTP.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@Valid @PathVariable Long id) {
         alunoService.deletar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    // Métodos privados para conversão entre AlunoRequest/Aluno e Aluno/AlunoResponse
     private Aluno alunoRequestToAluno(AlunoRequest alunoRequest) {
         Aluno aluno = new Aluno();
         aluno.setNome(alunoRequest.getNome());

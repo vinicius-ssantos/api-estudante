@@ -7,7 +7,10 @@ import com.viniciussantos.service.AlunoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Implementação do serviço AlunoService, responsável pela lógica de negócio
+ * relacionada aos Alunos.
+ */
 @Service
 public class AlunoServiceImpl implements AlunoService {
 
@@ -17,15 +20,31 @@ public class AlunoServiceImpl implements AlunoService {
         this.alunoRepository = alunoRepository;
     }
 
+    /**
+     * Cria um novo aluno.
+     *
+     * @param aluno Objeto Aluno a ser salvo.
+     * @return O Aluno salvo.
+     */
     public Aluno criar(Aluno aluno) {
         return alunoRepository.save(aluno);
     }
 
+    /**
+     * Lista todos os alunos.
+     *
+     * @return Lista de todos os Alunos.
+     */
     public List<Aluno> listar() {
         return alunoRepository.findAll();
     }
 
-
+    /**
+     * Busca um aluno pelo ID.
+     *
+     * @param id ID do aluno a ser buscado.
+     * @return O Aluno encontrado ou null se não existir.
+     */
     public Aluno buscarPorId(Long id) {
         return alunoRepository
                 .findById(id)
@@ -57,12 +76,26 @@ public class AlunoServiceImpl implements AlunoService {
         return alunoRepository.save(alunoEncontrado);
     }
 
+
+    /**
+     * Atualiza completamente um aluno.
+     *
+     * @param aluno Objeto Aluno com os dados a serem atualizados.
+     * @param id ID do Aluno a ser atualizado.
+     * @return O Aluno atualizado.
+     */
     public Aluno atualizar(Aluno aluno, Long id) {
         buscarPorId(id);
         aluno.setId(id);
         return alunoRepository.save(aluno);
     }
 
+
+    /**
+     * Deleta um aluno pelo ID.
+     *
+     * @param id ID do Aluno a ser deletado.
+     */
     public void deletar(Long id) {
         alunoRepository.deleteById(id);
     }

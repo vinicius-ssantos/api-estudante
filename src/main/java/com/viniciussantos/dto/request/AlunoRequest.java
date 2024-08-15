@@ -4,7 +4,9 @@ import jakarta.persistence.ElementCollection;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.util.List;
-
+/**
+ * Classe de DTO para capturar os dados de requisição de um Aluno.
+ */
 public class AlunoRequest {
 
     @NotBlank(message = "O nome do aluno é obrigatório.")

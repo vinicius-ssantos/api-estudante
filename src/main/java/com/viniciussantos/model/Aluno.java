@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.util.List;
-
+/**
+ * Classe de entidade que representa um Aluno no sistema.
+ */
 @Entity
 public class Aluno {
 

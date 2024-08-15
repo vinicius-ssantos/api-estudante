@@ -4,6 +4,13 @@ import com.viniciussantos.model.Aluno;
 
 import java.util.List;
 
+
+/**
+ * Interface de serviço para operações relacionadas a Alunos.
+ *
+ * Esta interface define os métodos principais para gerenciar Alunos, como
+ * criar, listar, buscar, atualizar e deletar.
+ */
 public interface AlunoService {
 
     public Aluno criar(Aluno aluno);

@@ -8,10 +8,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-
+/**
+ * Manipulador global de exceções para capturar e tratar exceções de forma centralizada.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Manipula a exceção RecursoNaoEncontradoException.
+     *
+     * @param ex A exceção lançada.
+     * @param request O objeto WebRequest que contém os detalhes da requisição.
+     * @return ResponseEntity com o erro formatado e o status HTTP.
+     */
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<?> handleRecursoNaoEncontradoException(RecursoNaoEncontradoException ex , WebRequest request) {
         // Logar o erro, se necessário
@@ -26,6 +35,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+
+    /**
+     * Manipula todas as exceções não capturadas por handlers específicos.
+     *
+     * @param ex A exceção lançada.
+     * @param request O objeto WebRequest que contém os detalhes da requisição.
+     * @return ResponseEntity com o erro formatado e o status HTTP.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
