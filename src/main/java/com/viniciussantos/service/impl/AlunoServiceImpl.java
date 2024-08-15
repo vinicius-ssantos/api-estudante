@@ -1,5 +1,6 @@
 package com.viniciussantos.service.impl;
 
+import com.viniciussantos.exception.RecursoNaoEncontradoException;
 import com.viniciussantos.model.Aluno;
 import com.viniciussantos.repository.AlunoRepository;
 import com.viniciussantos.service.AlunoService;
@@ -10,9 +11,9 @@ import java.util.List;
 @Service
 public class AlunoServiceImpl implements AlunoService {
 
-    public AlunoRepository alunoRepository;
+    private AlunoRepository alunoRepository;
 
-    public AlunoServiceImpl(AlunoRepository alunoRepository) {
+    private AlunoServiceImpl(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
     }
 
@@ -26,7 +27,10 @@ public class AlunoServiceImpl implements AlunoService {
 
 
     public Aluno buscarPorId(Long id) {
-        return alunoRepository.findById(id).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        return alunoRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new RecursoNaoEncontradoException("Aluno não encontrado com o ID: " + id));
     }
 
     public Aluno atualizarParcialmente(Aluno aluno, Long id) {
