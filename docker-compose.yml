@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db-estudante:
+    image: mysql:8.0
+    container_name: mysql_estudante_db
+    restart: no
+    environment:
+      MYSQL_ROOT_PASSWORD:  root_password
+      MYSQL_DATABASE: estudante
+      MYSQL_USER: viniciussantos
+      MYSQL_PASSWORD: usuario_senha
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge
