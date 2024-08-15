@@ -5,11 +5,11 @@ import com.viniciussantos.dto.request.AlunoRequest;
 import com.viniciussantos.dto.response.AlunoResponse;
 import com.viniciussantos.model.Aluno;
 import com.viniciussantos.service.AlunoService;
+import com.viniciussantos.validacao.OnPatch;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/aluno")
 public class AlunoController {
-//    private static final Logger logger = LoggerFactory.getLogger(AlunoController.class);
+
 
     public final AlunoService alunoService;
 
@@ -95,7 +95,7 @@ public class AlunoController {
      * @return ResponseEntity contendo os dados do aluno atualizado e o status HTTP.
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<?> atualizarParcialmente(@Valid @RequestBody AlunoRequest alunoRequest, @PathVariable Long id) {
+    public ResponseEntity<?> atualizarParcialmente(@Validated(OnPatch.class) @RequestBody AlunoRequest alunoRequest, @PathVariable Long id) {
         Aluno updatedAluno = alunoService.atualizarParcialmente(alunoRequestToAluno(alunoRequest), id);
 
         return new ResponseEntity<>(alunoToAlunoResponse(updatedAluno), HttpStatus.OK);

@@ -16,7 +16,7 @@ public class AlunoServiceImpl implements AlunoService {
 
     private AlunoRepository alunoRepository;
 
-    private AlunoServiceImpl(AlunoRepository alunoRepository) {
+    AlunoServiceImpl(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
     }
 

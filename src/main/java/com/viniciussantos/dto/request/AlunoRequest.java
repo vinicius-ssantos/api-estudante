@@ -1,5 +1,7 @@
 package com.viniciussantos.dto.request;
 
+import com.viniciussantos.validacao.OnCreate;
+import com.viniciussantos.validacao.OnUpdate;
 import jakarta.persistence.ElementCollection;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -9,20 +11,20 @@ import java.util.List;
  */
 public class AlunoRequest {
 
-    @NotBlank(message = "O nome do aluno é obrigatório.")
-    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.")
+    @NotBlank(message = "O nome do aluno é obrigatório.",groups = {OnCreate.class, OnUpdate.class})
+    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.",groups = {OnCreate.class, OnUpdate.class})
     private String nome;
 
-    @NotNull(message = "A idade é obrigatória.")
-    @Min(value = 5, message = "A idade mínima é 5 anos.")
-    @Max(value = 100, message = "A idade máxima é 100 anos.")
+    @NotNull(message = "A idade é obrigatória.",groups = {OnCreate.class, OnUpdate.class})
+    @Min(value = 5, message = "A idade mínima é 5 anos.",groups = {OnCreate.class, OnUpdate.class})
+    @Max(value = 100, message = "A idade máxima é 100 anos.",groups = {OnCreate.class, OnUpdate.class})
     private Integer idade;
 
-    @NotBlank(message = "O nome do professor é obrigatório.")
+//    @NotBlank(message = "O nome do professor é obrigatório.")
     @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.")
     private String nomeProfessor;
 
-    @NotNull(message = "O número da sala é obrigatório.")
+//    @NotNull(message = "O número da sala é obrigatório.")
     @Positive(message = "O número da sala deve ser um valor positivo.")
     private Integer numeroSala;
 
@@ -50,19 +52,19 @@ public class AlunoRequest {
         this.idade = idade;
     }
 
-    public @NotBlank(message = "O nome do professor é obrigatório.") @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.") String getNomeProfessor() {
+    public  @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.") String getNomeProfessor() {
         return nomeProfessor;
     }
 
-    public void setNomeProfessor(@NotBlank(message = "O nome do professor é obrigatório.") @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.") String nomeProfessor) {
+    public void setNomeProfessor( @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.") String nomeProfessor) {
         this.nomeProfessor = nomeProfessor;
     }
 
-    public @NotNull(message = "O número da sala é obrigatório.") @Positive(message = "O número da sala deve ser um valor positivo.") Integer getNumeroSala() {
+    public  @Positive(message = "O número da sala deve ser um valor positivo.") Integer getNumeroSala() {
         return numeroSala;
     }
 
-    public void setNumeroSala(@NotNull(message = "O número da sala é obrigatório.") @Positive(message = "O número da sala deve ser um valor positivo.") Integer numeroSala) {
+    public void setNumeroSala( @Positive(message = "O número da sala deve ser um valor positivo.") Integer numeroSala) {
         this.numeroSala = numeroSala;
     }
 
@@ -80,5 +82,5 @@ public class AlunoRequest {
     public void setNotaSegundoSemestre(@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float notaSegundoSemestre) {
         this.notaSegundoSemestre = notaSegundoSemestre;
     }
-// Getters e Setters
+
 }

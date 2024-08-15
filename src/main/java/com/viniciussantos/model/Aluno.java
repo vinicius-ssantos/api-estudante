@@ -22,10 +22,10 @@ public class Aluno {
     @Min(value = 5, message = "A idade mínima é 5 anos.")
     @Max(value = 100, message = "A idade máxima é 100 anos.")
     private Integer idade;
-    @NotBlank(message = "O nome do professor é obrigatório.")
+//    @NotBlank(message = "O nome do professor é obrigatório.")
     @Size(min = 2, max = 100, message = "O nome do professor deve ter entre 2 e 100 caracteres.")
     private String nomeProfessor;
-    @NotNull(message = "O número da sala é obrigatório.")
+//    @NotNull(message = "O número da sala é obrigatório.")
     @Positive(message = "O número da sala deve ser um valor positivo.")
     private Integer numeroSala;
     @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
