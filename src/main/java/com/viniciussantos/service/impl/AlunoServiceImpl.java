@@ -69,8 +69,11 @@ public class AlunoServiceImpl implements AlunoService {
         if (aluno.getNumeroSala() != null) {
             alunoEncontrado.setNumeroSala(aluno.getNumeroSala());
         }
-        if (aluno.getNotasSemestre() != null) {
-            alunoEncontrado.setNotasSemestre(aluno.getNotasSemestre());
+        if (aluno.getNotaPrimeiroSemestre() != null) {
+            alunoEncontrado.setNotaPrimeiroSemestre(aluno.getNotaPrimeiroSemestre());
+        }
+        if (aluno.getNotaSegundoSemestre() != null) {
+            alunoEncontrado.setNotaSegundoSemestre(aluno.getNotaSegundoSemestre());
         }
 
         return alunoRepository.save(alunoEncontrado);

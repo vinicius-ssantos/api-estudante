@@ -11,17 +11,20 @@ public class AlunoResponse {
     private Integer idade;
     private String nomeProfessor;
     private Integer numeroSala;
-    private List<Float> notasSemestre;
+    private Float notaPrimeiroSemestre;
+    private Float notaSegundoSemestre;
 
     // Construtores, Getters e Setters
 
-    public AlunoResponse(Long id, String nome, Integer idade, String nomeProfessor, Integer numeroSala, List<Float> notasSemestre) {
+    public AlunoResponse(Long id, String nome, Integer idade, String nomeProfessor, Integer numeroSala, Float notaPrimeiroSemestre, Float notaSegundoSemestre) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.nomeProfessor = nomeProfessor;
         this.numeroSala = numeroSala;
-        this.notasSemestre = notasSemestre;
+        this.notaPrimeiroSemestre = notaPrimeiroSemestre;
+        this.notaSegundoSemestre = notaSegundoSemestre;
+
     }
 
     public String getNome() {
@@ -64,11 +67,18 @@ public class AlunoResponse {
         this.numeroSala = numeroSala;
     }
 
-    public List<Float> getNotasSemestre() {
-        return notasSemestre;
+    public Float getNotaPrimeiroSemestre() {
+        return notaPrimeiroSemestre;
     }
 
-    public void setNotasSemestre(List<Float> notasSemestre) {
-        this.notasSemestre = notasSemestre;
+    public void setNotaPrimeiroSemestre(Float notaPrimeiroSemestre) {
+        this.notaPrimeiroSemestre = notaPrimeiroSemestre;
+    }
+    public Float getNotaSegundoSemestre() {
+        return notaSegundoSemestre;
+    }
+
+    public void setNotaSegundoSemestre(Float notaSegundoSemestre) {
+        this.notaSegundoSemestre = notaSegundoSemestre;
     }
 }

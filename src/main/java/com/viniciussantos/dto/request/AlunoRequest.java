@@ -26,11 +26,13 @@ public class AlunoRequest {
     @Positive(message = "O número da sala deve ser um valor positivo.")
     private Integer numeroSala;
 
-    @ElementCollection
-    @Valid
-    private List<@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
-                 @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") 
-                 Float> notasSemestre;
+    @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
+    @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.")
+    private Float notaPrimeiroSemestre;
+
+    @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
+    @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.")
+    private Float notaSegundoSemestre;
 
     public @NotBlank(message = "O nome do aluno é obrigatório.") @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.") String getNome() {
         return nome;
@@ -64,12 +66,19 @@ public class AlunoRequest {
         this.numeroSala = numeroSala;
     }
 
-    public @Valid List<@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float> getNotasSemestre() {
-        return notasSemestre;
+
+    public @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float getNotaPrimeiroSemestre() {
+        return notaPrimeiroSemestre;
+    }
+    public void setNotaPrimeiroSemestre(@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float notaPrimeiroSemestre) {
+        this.notaPrimeiroSemestre = notaPrimeiroSemestre;
     }
 
-    public void setNotasSemestre(@Valid List<@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float> notasSemestre) {
-        this.notasSemestre = notasSemestre;
+    public @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float getNotaSegundoSemestre() {
+        return notaSegundoSemestre;
+    }
+    public void setNotaSegundoSemestre(@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float notaSegundoSemestre) {
+        this.notaSegundoSemestre = notaSegundoSemestre;
     }
 // Getters e Setters
 }

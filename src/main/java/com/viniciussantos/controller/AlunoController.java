@@ -122,7 +122,8 @@ public class AlunoController {
         aluno.setIdade(alunoRequest.getIdade());
         aluno.setNomeProfessor(alunoRequest.getNomeProfessor());
         aluno.setNumeroSala(alunoRequest.getNumeroSala());
-        aluno.setNotasSemestre(alunoRequest.getNotasSemestre());
+        aluno.setNotaPrimeiroSemestre(alunoRequest.getNotaPrimeiroSemestre());
+        aluno.setNotaSegundoSemestre(alunoRequest.getNotaSegundoSemestre());
         return aluno;
     }
     private AlunoResponse alunoToAlunoResponse(Aluno aluno) {
@@ -132,7 +133,8 @@ public class AlunoController {
                 aluno.getIdade(),
                 aluno.getNomeProfessor(),
                 aluno.getNumeroSala(),
-                aluno.getNotasSemestre()
+                aluno.getNotaPrimeiroSemestre(),
+                aluno.getNotaSegundoSemestre()
         );
     }
 }

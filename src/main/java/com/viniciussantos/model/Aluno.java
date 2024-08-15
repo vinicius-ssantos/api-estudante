@@ -28,11 +28,13 @@ public class Aluno {
     @NotNull(message = "O número da sala é obrigatório.")
     @Positive(message = "O número da sala deve ser um valor positivo.")
     private Integer numeroSala;
-    @ElementCollection
-    @Valid
-    private List<@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
+    @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
     @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.")
-            Float> notasSemestre;
+    private Float notaPrimeiroSemestre;
+
+    @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.")
+    @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.")
+    private Float notaSegundoSemestre;
 
 
 
@@ -78,11 +80,19 @@ public class Aluno {
         this.numeroSala = numeroSala;
     }
 
-    public List<Float> getNotasSemestre() {
-        return notasSemestre;
+    public @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float getNotaPrimeiroSemestre() {
+        return notaPrimeiroSemestre;
     }
 
-    public void setNotasSemestre(List<Float> notasSemestre) {
-        this.notasSemestre = notasSemestre;
+    public void setNotaPrimeiroSemestre(@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float notaPrimeiroSemestre) {
+        this.notaPrimeiroSemestre = notaPrimeiroSemestre;
+    }
+
+    public @DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float getNotaSegundoSemestre() {
+        return notaSegundoSemestre;
+    }
+
+    public void setNotaSegundoSemestre(@DecimalMin(value = "0.0", inclusive = true, message = "A nota mínima é 0.0.") @DecimalMax(value = "10.0", inclusive = true, message = "A nota máxima é 10.0.") Float notaSegundoSemestre) {
+        this.notaSegundoSemestre = notaSegundoSemestre;
     }
 }
