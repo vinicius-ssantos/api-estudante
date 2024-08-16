@@ -16,6 +16,7 @@ public class ContainersConfig {
     MySQLContainer<?> mySQLContainer(){
         return new MySQLContainer<>("mysql:8.0.33");
     }
+
 //    PostgreSQLContainer<?> postgreSQLContainer(){
 //        return new PostgreSQLContainer<>("postgres:15-alpine");
 

@@ -1,12 +1,15 @@
 package com.viniciussantos.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 /**
  * Classe de entidade que representa um Aluno no sistema.
  */
+
+@Schema(description = "Entidade que representa um aluno.")
 @Entity
 public class Aluno {
 
