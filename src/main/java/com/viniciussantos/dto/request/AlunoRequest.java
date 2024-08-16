@@ -2,10 +2,8 @@ package com.viniciussantos.dto.request;
 
 import com.viniciussantos.validacao.OnCreate;
 import com.viniciussantos.validacao.OnUpdate;
-import jakarta.persistence.ElementCollection;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import java.util.List;
+
 /**
  * Classe de DTO para capturar os dados de requisição de um Aluno.
  */

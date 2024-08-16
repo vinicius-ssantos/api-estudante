@@ -4,7 +4,6 @@ package com.viniciussantos.controller;
 
 import com.viniciussantos.dto.request.AlunoRequest;
 import com.viniciussantos.dto.response.AlunoResponse;
-import com.viniciussantos.handler.ErrorResponse;
 import com.viniciussantos.model.Aluno;
 import com.viniciussantos.service.AlunoService;
 import com.viniciussantos.validacao.OnPatch;
@@ -15,7 +14,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

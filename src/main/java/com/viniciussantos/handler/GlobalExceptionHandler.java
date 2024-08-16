@@ -57,6 +57,12 @@ public class GlobalExceptionHandler {
     }
 
 
+    /**
+     * Manipula a exceção EmptyResultDataAccessException.
+     *
+     * @param ex A exceção lançada.
+     * @return ResponseEntity com a mensagem de erro e o status HTTP.
+     */
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<String> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recurso não encontrado");

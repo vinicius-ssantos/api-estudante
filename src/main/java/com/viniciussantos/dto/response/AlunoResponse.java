@@ -1,6 +1,6 @@
 package com.viniciussantos.dto.response;
 
-import java.util.List;
+
 /**
  * Classe de DTO para enviar os dados de resposta de um Aluno.
  */

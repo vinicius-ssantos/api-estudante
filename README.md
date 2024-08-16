@@ -1,155 +1,95 @@
-### **README.md**
+### 🎯 **Objetivo do Projeto**
+O objetivo deste projeto é desenvolver uma API REST para gerenciar informações de estudantes, incluindo operações CRUD (Criar, Ler, Atualizar e Deletar) utilizando tecnologias modernas como Spring Boot, JPA, e banco de dados relacional.
 
-# Projeto de Gerenciamento de Alunos - API RESTful
+### 🛠️ **Tecnologias Utilizadas**
+- **Java**: Linguagem de programação utilizada para desenvolver a aplicação.
+- **Spring Boot**: Framework utilizado para facilitar o desenvolvimento de aplicações Java, oferecendo funcionalidades prontas para a criação de APIs REST.
+- **Spring Data JPA**: Facilita a integração da aplicação com o banco de dados, utilizando o padrão ORM.
+- **Docker**: Ferramenta para criar e gerenciar containers, facilitando a configuração do ambiente de desenvolvimento e produção.
+- **Docker Compose**: Orquestrador de containers Docker, usado para definir e gerenciar ambientes multi-container.
+- **H2 Database**: Banco de dados em memória utilizado para testes.
+- **JUnit e Mockito**: Bibliotecas para criação e execução de testes automatizados.
+- **Maven**: Ferramenta de automação de compilação e gestão de dependências.
 
-## **Descrição do Projeto**
+### 📐 **Padrões e Boas Práticas Abordados**
+- **Arquitetura em Camadas**: Separação da lógica da aplicação em camadas como Controlador, Serviço, Repositório e Modelo.
+- **Princípios SOLID**: Aplicação de princípios de design orientado a objetos, visando um código mais modular e fácil de manter.
+- **Testes Unitários e de Integração**: Implementação de testes para garantir a qualidade e o correto funcionamento da aplicação.
+- **Versionamento de Código**: Utilização de Git para controle de versões e colaboração em equipe.
 
-Este projeto consiste em uma API RESTful desenvolvida em **Java** utilizando o **Spring Boot**. A API foi projetada para gerenciar dados de alunos em uma escola, permitindo operações CRUD (Create, Read, Update, Delete). A API oferece suporte para validações de dados, atualizações parciais usando o método HTTP PATCH, e inclui todos os componentes necessários para a persistência dos dados.
+### ⚙️ **Provisionamento do Ambiente**
+Este projeto utiliza o Docker e Docker Compose para configurar e executar o ambiente de desenvolvimento e produção.
 
-## **Tecnologias Utilizadas**
+**Pré-requisitos**:
+- Docker instalado em sua máquina.
+- Docker Compose instalado.
 
-- **Java 17**
-- **Spring Boot 2.7.x**
-- **Spring Data JPA**
-- **Hibernate Validator**
-- **MySQL**
-- **Lombok** (Opcional, para reduzir o boilerplate de código)
-- **Maven**
+**Passos para provisionar o ambiente**:
 
-## **Funcionalidades Implementadas**
+1. **Clonar o repositório**:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd estudantes-api
+   ```
 
-### **Modelo (Entity) - `Aluno`**
+2. **Construir e executar os containers**:
+   ```bash
+   docker-compose up --build
+   ```
 
-A entidade `Aluno` representa os dados de um aluno e possui os seguintes campos:
+3. **Acessar a aplicação**:
+  - A API estará disponível em `http://localhost:8080`.
+  - Documentação da API (se disponível) estará em `http://localhost:8080/swagger-ui.html`.
 
-- **`id`**: Identificador único do aluno (auto-gerado pelo banco de dados).
-- **`nome`**: Nome do aluno. Validação:
-    - **@NotBlank**: O nome é obrigatório.
-    - **@Size(min = 2, max = 100)**: O nome deve ter entre 2 e 100 caracteres.
-- **`idade`**: Idade do aluno. Validação:
-    - **@NotNull**: A idade é obrigatória.
-    - **@Min(5)**: Idade mínima é de 5 anos.
-    - **@Max(100)**: Idade máxima é de 100 anos.
-- **`nomeProfessor`**: Nome do professor responsável. Validação:
-    - **@NotBlank**: O nome do professor é obrigatório.
-    - **@Size(min = 2, max = 100)**: O nome do professor deve ter entre 2 e 100 caracteres.
-- **`numeroSala`**: Número da sala onde o aluno estuda. Validação:
-    - **@NotNull**: O número da sala é obrigatório.
-    - **@Positive**: O número da sala deve ser um valor positivo.
-- **`notasSemestre`**: Lista de notas do semestre. Validação:
-    - **@ElementCollection**: Indica que uma coleção de valores básicos (Float) está embutida na entidade `Aluno`.
-    - **@DecimalMin(0.0)** e **@DecimalMax(10.0)**: Cada nota deve estar entre 0.0 e 10.0.
+4. **Executar Testes**:
+   Para rodar os testes, utilize o Maven:
+   ```bash
+   mvn test
+   ```
 
-### **Repositório - `AlunoRepository`**
+### 🚀 **Deploy**
+O deploy pode ser realizado em qualquer ambiente que suporte Docker. Basta seguir os passos de provisionamento descritos acima.
 
-- **Interface** que estende `JpaRepository<Aluno, Long>`, fornecendo métodos CRUD básicos automaticamente.
-
-### **Serviço - `AlunoService` e `AlunoServiceImpl`**
-
-- **Interface `AlunoService`**: Define os métodos de serviço para manipulação dos dados de `Aluno`.
-- **Classe `AlunoServiceImpl`**: Implementa os métodos definidos na interface, contendo a lógica de negócios para as operações CRUD e suporte a atualizações parciais com o método PATCH.
-
-### **Controlador - `AlunoController`**
-
-- **Controller REST** que mapeia as operações CRUD:
-    - `POST /alunos`: Criação de um novo aluno.
-    - `GET /alunos`: Recuperação de todos os alunos.
-    - `GET /alunos/{id}`: Recuperação de um aluno específico pelo seu ID.
-    - `PUT /alunos/{id}`: Atualização completa dos dados de um aluno.
-    - `PATCH /alunos/{id}`: Atualização parcial dos dados de um aluno.
-    - `DELETE /alunos/{id}`: Exclusão de um aluno.
-
-### **Validações**
-
-As validações são aplicadas para garantir que os dados recebidos pela API estejam no formato esperado. Isso é essencial para manter a integridade dos dados dentro do sistema.
-
-- Para a criação de um novo aluno (`POST`), validações estritas são aplicadas para garantir que todos os campos obrigatórios estejam presentes e corretos.
-- Para atualizações parciais (`PATCH`), as validações permitem campos nulos, indicando que esses campos não devem ser atualizados.
-
-## **Execução do Projeto**
-
-### **Pré-requisitos**
-
-- **Java 17** instalado.
-- **Maven** instalado.
-- **MySQL** instalado e configurado.
-
-### **Configuração do Banco de Dados**
-
-Configure as propriedades de conexão ao banco de dados no arquivo `application.properties`:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/escola
-spring.datasource.username=usuario
-spring.datasource.password=senha
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+### 🗂️ **Estrutura do Projeto**
+```plaintext
+estudantes-api/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── viniciussantos/
+│   │   │           ├── controller/
+│   │   │           ├── dto/
+│   │   │           ├── exception/
+│   │   │           ├── handler/
+│   │   │           ├── model/
+│   │   │           ├── repository/
+│   │   │           └── service/
+│   │   └── resources/
+│   └── test/
+│       ├── java/
+│       └── resources/
+│
+├── Dockerfile
+├── docker-compose.yml
+├── pom.xml
+└── README.md
 ```
 
-Certifique-se de que o banco de dados `escola` esteja criado no MySQL.
+### ✍️ **Contribuição**
+Sinta-se à vontade para contribuir com este projeto. Para isso:
+1. Faça um fork do repositório.
+2. Crie uma branch com sua feature: `git checkout -b minha-feature`.
+3. Faça commit das suas mudanças: `git commit -m 'Minha nova feature'`.
+4. Faça push para a branch: `git push origin minha-feature`.
+5. Crie um Pull Request.
 
-### **Compilação e Execução**
-
-1. **Compilar o Projeto**:
-    - No diretório raiz do projeto, execute:
-      ```bash
-      mvn clean install
-      ```
-
-2. **Executar a Aplicação**:
-    - Execute a aplicação com o comando:
-      ```bash
-      mvn spring-boot:run
-      ```
-
-3. **Acesso à API**:
-    - A aplicação estará disponível em `http://localhost:8080`.
-
-### **Testando a API**
-
-Você pode testar a API usando ferramentas como **Postman** ou **cURL**. Exemplos de requisições:
-
-- **Criação de um Aluno**:
-  ```http
-  POST /alunos
-  Content-Type: application/json
-
-  {
-      "nome": "João Souza",
-      "idade": 16,
-      "nomeProfessor": "Prof. Maria",
-      "numeroSala": 102,
-      "notasSemestre": [9.0, 8.0, 9.5]
-  }
-  ```
-
-- **Atualização Parcial de um Aluno**:
-  ```http
-  PATCH /alunos/1
-  Content-Type: application/json
-
-  {
-      "idade": 17
-  }
-  ```
-
-- **Recuperar Todos os Alunos**:
-  ```http
-  GET /alunos
-  ```
-
-- **Excluir um Aluno**:
-  ```http
-  DELETE /alunos/1
-  ```
-
-## **Considerações Finais**
-
-Este projeto é uma base sólida para o desenvolvimento de sistemas de gerenciamento de alunos em uma escola. Ele pode ser expandido para incluir mais funcionalidades, como autenticação, autorização, e integração com outros serviços.
-
-Se você tiver alguma dúvida ou problema, sinta-se à vontade para abrir uma _issue_ ou contribuir com melhorias no código.
+### 🛡️ **Licença**
+Este projeto está licenciado sob os termos da licença MIT.
 
 ---
 
-Espero que este README ajude a esclarecer o propósito do projeto, como ele foi construído e como ele pode ser utilizado e expandido no futuro. Se precisar de mais alguma coisa, estou à disposição! 📄
+Esse é o README que cobre os principais aspectos do seu projeto! Caso precise de mais alguma informação ou ajuste, estou à disposição.
+
+[Enter the Vault](https://pulsr.co.uk/Vault.html)
