@@ -3,6 +3,7 @@ package com.viniciussantos.repository;
 
 import com.viniciussantos.ContainersConfig;
 import com.viniciussantos.model.Aluno;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class AlunoRepositoryTest {
     private Aluno aluno;
     @BeforeEach
     public void setup() {
+        RestAssured.baseURI = "http://localhost";
+
         aluno = new Aluno();
         aluno.setNome("João da Silva");
         aluno.setIdade(20);

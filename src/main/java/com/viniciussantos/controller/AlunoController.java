@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Controlador REST para gerenciar operações CRUD relacionadas a alunos.
  */
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("api/v1/aluno")
 public class AlunoController {
 
 
