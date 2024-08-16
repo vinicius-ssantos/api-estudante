@@ -1,7 +1,7 @@
 package com.viniciussantos.repository;
 
 
-import com.viniciussantos.ContainersConfig;
+import com.viniciussantos.config.ContainersConfig;
 import com.viniciussantos.model.Aluno;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +14,13 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+//@DataJpaTest(properties = {
+//        "spring.test.database.replace=none",
+//        "spring.datasource.url=jdbc:tc:mysql:8.0.33:///"
+//})
 @DataJpaTest(properties = {
         "spring.test.database.replace=none",
-        "spring.datasource.url=jdbc:tc:mysql:8.0.33:///"
+        "spring.datasource.url=jdbc:tc:postgresql:15-alpine:///"
 })
 @Import(ContainersConfig.class)
 public class AlunoRepositoryTest {

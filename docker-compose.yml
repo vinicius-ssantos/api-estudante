@@ -1,24 +1,43 @@
 version: '3.8'
 services:
-  db-estudante:
-    image: mysql:8.0
-    container_name: mysql_estudante_db
+#  db-estudante:
+#    image: mysql:8.0
+#    container_name: mysql_estudante_db
+#    restart: no
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root_password
+#      MYSQL_DATABASE: estudante
+#      MYSQL_USER: viniciussantos
+#      MYSQL_PASSWORD: usuario_senha
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - db-data:/var/lib/mysql
+#      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+#    networks:
+#      - app-network
+
+  # Serviço do PostgreSQL
+  postgres-estudante:
+    image: postgres:15-alpine
+    container_name: postgres_estudante_db
     restart: no
     environment:
-      MYSQL_ROOT_PASSWORD:  root_password
-      MYSQL_DATABASE: estudante
-      MYSQL_USER: viniciussantos
-      MYSQL_PASSWORD: usuario_senha
+      ROOT_PASSWORD: root_password
+      POSTGRES_USER: viniciussantos
+      POSTGRES_PASSWORD: usuario_senha
+      POSTGRES_DB: estudante
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db-data:/var/lib/mysql
-      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - pg-data:/var/lib/postgresql/data
+      - ./init-db-pg.sql:/docker-entrypoint-initdb.d/init-db-pg.sql
     networks:
       - app-network
 
 volumes:
   db-data:
+  pg-data:
 
 networks:
   app-network:

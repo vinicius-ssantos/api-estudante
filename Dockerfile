@@ -1,24 +1,16 @@
-# Estágio 1: Estágio de Construção
-FROM maven:3.8.4-openjdk-17 as build
+FROM ubuntu:latest AS build
 
-# Define o diretório de trabalho dentro do contêiner
-WORKDIR /app
-
-# Copia tod0 o conteúdo do diretório atual para o contêiner em /app
+RUN apt-get update
+RUN apt-get instaLL openjdk-17-jdk -y
 COPY . .
 
-# Executa o Maven para construir a aplicação, ignorando os testes
-RUN mvn clean package -DskipTests
+RUN apt-get install maven -y
+RUN mvn clean install
 
+FROM openjdk:17-jdk-slim
 
-# Estágio 2: Estágio Final
-FROM openjdk:17
+EXPOSE 8080
 
-# Define o diretório de trabalho dentro do contêiner
-WORKDIR /app
+COPY --from=build /target/*.jar app.jar
 
-# Copia o arquivo JAR do estágio de construção para o diretório /app no contêiner final
-COPY --from=build ./app/target/*.jar ./app.jar
-
-# Especifica o comando a ser executado ao iniciar o contêiner
-ENTRYPOINT java -jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]

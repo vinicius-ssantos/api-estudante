@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -11,9 +12,13 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 class EstudantesApiApplicationTests {
 
+//    @Container
+//    @ServiceConnection
+//    static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.33");
+
     @Container
     @ServiceConnection
-    static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.33");
+    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15-alpine");
 
     @Test
     void contextLoads() {

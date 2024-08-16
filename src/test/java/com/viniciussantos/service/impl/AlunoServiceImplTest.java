@@ -2,7 +2,7 @@ package com.viniciussantos.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.viniciussantos.ContainersConfig;
+import com.viniciussantos.config.ContainersConfig;
 import com.viniciussantos.model.Aluno;
 import com.viniciussantos.repository.AlunoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +17,13 @@ import org.springframework.context.annotation.Import;
 import java.util.List;
 import java.util.Optional;
 
+//@DataJpaTest(properties = {
+//        "spring.test.database.replace=none",
+//        "spring.datasource.url=jdbc:tc:mysql:8.0.33:///"
+//})
 @DataJpaTest(properties = {
         "spring.test.database.replace=none",
-        "spring.datasource.url=jdbc:tc:mysql:8.0.33:///"
+        "spring.datasource.url=jdbc:tc:postgresql:15-alpine:///"
 })
 @Import(ContainersConfig.class)
 class AlunoServiceImplTest {
