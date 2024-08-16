@@ -1,6 +1,7 @@
 package com.viniciussantos.handler;
 
 import com.viniciussantos.exception.RecursoNaoEncontradoException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -54,4 +55,11 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<String> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recurso não encontrado");
+    }
+
 }
