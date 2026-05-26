@@ -12,5 +12,6 @@ COPY render-workflow/requirements.txt ./render-workflow/requirements.txt
 RUN pip install --no-cache-dir -r ./render-workflow/requirements.txt
 COPY --from=build /app/target/*.jar app.jar
 COPY render-workflow/main.py ./render-workflow/main.py
+COPY render-workflow/main.py ./main.py
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
